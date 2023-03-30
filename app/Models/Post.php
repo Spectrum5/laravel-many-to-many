@@ -18,6 +18,10 @@ class Post extends Model
     ];
 
     public  function category() {
-        return $this->belongsTo(Category::class); // non dà errore perchè sono nella stessa name space
+        return $this->belongsTo(Category::class); 
+    }
+
+    public  function tags() {
+        return $this->belongsToMany(Tag::class); 
     }
 }

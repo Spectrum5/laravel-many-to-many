@@ -5,11 +5,11 @@
         <div class="row justify-content-center md-4">
             <div class="col">
                 <h1>
-                    Tutte le categorie
+                    Tutte i tag
                 </h1>
 
-                <a href="{{ route('admin.categories.create') }}" class="btn btn-success">
-                    Aggiungi categoria
+                <a href="{{ route('admin.tags.create') }}" class="btn btn-success">
+                    Aggiungi tag
                 </a>
             </div>
         </div>
@@ -30,30 +30,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $category)
+                        @foreach ($tags as $tag)
                             <tr>
-                                <th scope="row">{{ $category->id }}</th>
-                                <td>{{ $category->title }}</td>
-                                <td>{{ $category->slug }}</td>
-                                {{-- SELECT COUNT (*) FROM posts where category_id = $category->id --}}
-                                <td>{{ $category->posts()->count() }}</td>
+                                <th scope="row">{{ $tag->id }}</th>
+                                <td>{{ $tag->title }}</td>
+                                <td>{{ $tag->slug }}</td>
+                                {{-- SELECT COUNT (*) FROM posts where tag_id = $tag->id --}}
+                                <td>{{ $tag->posts()->count() }}</td>
                                 
                                 {{-- Alternativa per il il conteggio dei posts..
-                                <td>{{ count($category->posts) }}</td> --}}
+                                <td>{{ count($tag->posts) }}</td> --}}
                                 <td>
-                                    <a href="{{ route('admin.categories.show', $category->id) }}" class="btn btn-primary">
+                                    <a href="{{ route('admin.tags.show', $tag->id) }}" class="btn btn-primary">
                                         Dettagli
                                     </a>
 
-                                    <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-warning">
+                                    <a href="{{ route('admin.tags.edit', $tag->id) }}" class="btn btn-warning">
                                         Aggiorna
                                     </a>
 
                                     <form 
                                         class="d-inline-block" 
-                                        action="{{ route('admin.categories.destroy', $category->id) }}" 
+                                        action="{{ route('admin.tags.destroy', $tag->id) }}" 
                                         method="POST"
-                                        onsubmit="return confirm('sei sicuro di voler eliminare questa categoria?');">
+                                        onsubmit="return confirm('sei sicuro di voler eliminare questo tag?');">
                                         @csrf
                                         @method("DELETE")
 
