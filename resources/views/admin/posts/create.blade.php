@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="category_id">
+                        <label for="category_id" class="form-label">
                             Categoria
                         </label>
                         <select name="category_id" id="category_id" class="form-select">
@@ -53,6 +53,20 @@
                                 <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label d-block mb-2">
+                            Tag
+                        </label>
+                        @foreach ($tags as $tag)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="tags[]" type="checkbox" id="tag-{{ $tag->id }}" value="{{ $tag->id }}">
+                                <label class="form-check-label" for="tag-{{ $tag->id }}">
+                                    {{ $tag->name }}
+                                </label>
+                            </div>
+                        @endforeach
                     </div>
 
                     <div class="mb-3">

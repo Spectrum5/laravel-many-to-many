@@ -18,6 +18,7 @@ use App\Mail\NewPost;
 
 // Models
 use App\Models\Category;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -49,7 +50,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -110,8 +113,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
