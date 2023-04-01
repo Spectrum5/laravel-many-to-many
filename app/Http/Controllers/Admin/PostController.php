@@ -73,6 +73,12 @@ class PostController extends Controller
         // dd($data);
         $newPost = Post::create($data);
 
+
+        // Attach lega il singolo tag al singolo post
+        foreach ($data['tags'] as $tagId) {
+            $newPost->tags()->attach($tagId);
+        }
+
         $user = Auth::user();
 
         Mail::to([
