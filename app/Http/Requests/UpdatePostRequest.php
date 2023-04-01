@@ -35,7 +35,8 @@ class UpdatePostRequest extends FormRequest
             'content' => 'required|max:4096',
             'img' => 'nullable|image|max:2048',
             'delete_img' => 'nullable',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|array|exists:tags,id'
         ];
     }
 }

@@ -73,10 +73,12 @@ class PostController extends Controller
         // dd($data);
         $newPost = Post::create($data);
 
-
+        if (array_key_exists('tags', $data)) {
         // Attach lega il singolo tag al singolo post
-        foreach ($data['tags'] as $tagId) {
-            $newPost->tags()->attach($tagId);
+        // foreach ($data['tags'] as $tagId) {
+        //     $newPost->tags()->attach($tagId);
+        // }
+            $newPost->tags()->sync($data['tags']);
         }
 
         $user = Auth::user();
@@ -158,6 +160,22 @@ class PostController extends Controller
         $data['slug'] = Str::slug($data['title']);
 
         $post->update($data);
+
+        if (array_key_exists('tags', $data)){
+            // foreach ($post->tags as $tag) {
+            //     $post->tags()->detach($tag);
+            // }
+            // foreach ($data['tags'] as $tagId) {
+            //     $post->tags()->attach($tagId);
+            // }
+            // OPPURE
+            $post->tags()->sync($data['tags']);
+        }
+        else{
+            // $post->tags()->sync([]);
+            // OPPURE
+            $post->tags()->detach();
+        }
 
         return redirect()->route('admin.posts.show', $post->id)->with('success', 'Post aggiornato con successo!');
     }
