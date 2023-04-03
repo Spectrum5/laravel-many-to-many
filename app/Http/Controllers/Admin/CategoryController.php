@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Tag;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 
@@ -28,7 +29,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        {
+            $categories = Category::all();
+            $tags = Tag::all();
+    
+            return view('admin.categories.create', compact('categories'));
+        }
     }
 
     /**
